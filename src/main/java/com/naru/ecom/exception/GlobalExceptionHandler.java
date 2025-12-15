@@ -21,4 +21,12 @@ public class GlobalExceptionHandler {
                                                                     ));
     }
 
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<Map<String,Object>> handleInvalidCredentials(InvalidCredentialsException ex){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("timestamp", LocalDateTime.now(),
+                                                                           "status", 401,
+                                                                            "error", "Unauthorized",
+                                                                            "message", ex.getMessage()));
+    }
+
 }
